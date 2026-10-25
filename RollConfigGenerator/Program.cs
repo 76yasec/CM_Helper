@@ -44,7 +44,17 @@ public class ProjectEditorForm : Form
     BackColor = Color.White
   };
 
-  private readonly ListBox nozzleList = new() { Dock = DockStyle.Fill };
+  private readonly DataGridView nozzleGrid = new()
+  {
+    Dock = DockStyle.Fill,
+    ReadOnly = true,
+    AllowUserToAddRows = false,
+    AllowUserToDeleteRows = false,
+    SelectionMode = DataGridViewSelectionMode.FullRowSelect,
+    MultiSelect = false,
+    RowHeadersVisible = false
+  };
+
   private readonly List<NozzleData> nozzles = new();
   private int selectedNozzleIndex = -1;
   private bool internalNozzleSelectionChange = false;
@@ -90,7 +100,17 @@ public class ProjectEditorForm : Form
     BackColor = Color.White
   };
 
-  private readonly ListBox cbList = new() { Dock = DockStyle.Fill };
+  private readonly DataGridView cbGrid = new()
+  {
+    Dock = DockStyle.Fill,
+    ReadOnly = true,
+    AllowUserToAddRows = false,
+    AllowUserToDeleteRows = false,
+    SelectionMode = DataGridViewSelectionMode.FullRowSelect,
+    MultiSelect = false,
+    RowHeadersVisible = false
+  };
+
   private readonly List<CoolingBankData> coolingBanks = new();
   private int selectedCbIndex = -1;
   private bool internalCbSelectionChange = false;
@@ -348,14 +368,46 @@ public class ProjectEditorForm : Form
       Font = new Font(Font, FontStyle.Bold)
     };
 
-    nozzleList.SelectedIndexChanged += OnNozzleSelected;
+    nozzleGrid.Columns.Add("Id", "ID");
+    nozzleGrid.Columns.Add("Brand", "Brand");
+    nozzleGrid.Columns.Add("Typ", "Typ");
+    nozzleGrid.Columns.Add("Angle", "Winkel");
+    nozzleGrid.Columns.Add("Flow", "Flow");
+    nozzleGrid.Columns["Id"]!.Width = 120;
+    nozzleGrid.Columns["Brand"]!.Width = 140;
+    nozzleGrid.Columns["Typ"]!.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+    nozzleGrid.Columns["Angle"]!.Width = 90;
+    nozzleGrid.Columns["Flow"]!.Width = 110;
+
+    nozzleGrid.SelectionChanged += OnNozzleGridSelectionChanged;
     var footer = new Label { Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleLeft };
-    nozzleList.Tag = footer;
+    nozzleGrid.Tag = footer;
 
     panel.Controls.Add(title, 0, 0);
-    panel.Controls.Add(nozzleList, 0, 1);
+    panel.Controls.Add(nozzleGrid, 0, 1);
     panel.Controls.Add(footer, 0, 2);
     return panel;
+  }
+
+  private void SelectNozzleGridRow(int idx)
+  {
+    if (idx < 0 || idx >= nozzleGrid.Rows.Count) return;
+    nozzleGrid.ClearSelection();
+    nozzleGrid.Rows[idx].Selected = true;
+    nozzleGrid.CurrentCell = nozzleGrid.Rows[idx].Cells[0];
+  }
+
+  private void OnNozzleGridSelectionChanged(object? sender, EventArgs e)
+  {
+    if (internalNozzleSelectionChange) return;
+    if (nozzleGrid.CurrentRow == null) return;
+
+    int idx = nozzleGrid.CurrentRow.Index;
+    if (idx < 0 || idx >= nozzles.Count) return;
+
+    selectedNozzleIndex = idx;
+    LoadNozzleIntoInputs(idx);
+    AutoPreviewNozzle();
   }
 
   // ---------------- CoolingBank UI ----------------
@@ -478,14 +530,44 @@ public class ProjectEditorForm : Form
       Font = new Font(Font, FontStyle.Bold)
     };
 
-    cbList.SelectedIndexChanged += OnCoolingBankSelected;
+    cbGrid.Columns.Add("Id", "ID");
+    cbGrid.Columns.Add("TypeBank", "typeBank");
+    cbGrid.Columns.Add("Nozzles", "Nozzles");
+    cbGrid.Columns.Add("Zones", "Zonen");
+    cbGrid.Columns["Id"]!.Width = 140;
+    cbGrid.Columns["TypeBank"]!.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+    cbGrid.Columns["Nozzles"]!.Width = 90;
+    cbGrid.Columns["Zones"]!.Width = 80;
+
+    cbGrid.SelectionChanged += OnCoolingBankGridSelectionChanged;
     var footer = new Label { Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleLeft };
-    cbList.Tag = footer;
+    cbGrid.Tag = footer;
 
     panel.Controls.Add(title, 0, 0);
-    panel.Controls.Add(cbList, 0, 1);
+    panel.Controls.Add(cbGrid, 0, 1);
     panel.Controls.Add(footer, 0, 2);
     return panel;
+  }
+
+  private void SelectCoolingBankGridRow(int idx)
+  {
+    if (idx < 0 || idx >= cbGrid.Rows.Count) return;
+    cbGrid.ClearSelection();
+    cbGrid.Rows[idx].Selected = true;
+    cbGrid.CurrentCell = cbGrid.Rows[idx].Cells[0];
+  }
+
+  private void OnCoolingBankGridSelectionChanged(object? sender, EventArgs e)
+  {
+    if (internalCbSelectionChange) return;
+    if (cbGrid.CurrentRow == null) return;
+
+    int idx = cbGrid.CurrentRow.Index;
+    if (idx < 0 || idx >= coolingBanks.Count) return;
+
+    selectedCbIndex = idx;
+    LoadCoolingBankIntoInputs(idx);
+    AutoPreviewCoolingBank();
   }
 
   // ---------------- RollParam UI ----------------
@@ -811,7 +893,7 @@ public class ProjectEditorForm : Form
 
     RefreshNozzleList();
     internalNozzleSelectionChange = true;
-    nozzleList.SelectedIndex = selectedNozzleIndex;
+    SelectNozzleGridRow(selectedNozzleIndex);
     internalNozzleSelectionChange = false;
 
     nozzleOutput.Text = BuildNozzleEnvBlock(data);
@@ -820,7 +902,7 @@ public class ProjectEditorForm : Form
 
   private void CopySelectedNozzle()
   {
-    int index = nozzleList.SelectedIndex;
+    int index = selectedNozzleIndex;
     if (index < 0 || index >= nozzles.Count)
     {
       MessageBox.Show(this, "Bitte zuerst eine Nozzle in der Liste auswählen.", "Nozzle kopieren",
@@ -853,7 +935,7 @@ public class ProjectEditorForm : Form
     try
     {
       RefreshNozzleList();
-      nozzleList.SelectedIndex = selectedNozzleIndex;
+      SelectNozzleGridRow(selectedNozzleIndex);
     }
     finally { internalNozzleSelectionChange = false; }
 
@@ -895,24 +977,12 @@ public class ProjectEditorForm : Form
 
     selectedNozzleIndex = Math.Max(0, selectedNozzleIndex - 1);
     internalNozzleSelectionChange = true;
-    nozzleList.SelectedIndex = selectedNozzleIndex;
+    SelectNozzleGridRow(selectedNozzleIndex);
     internalNozzleSelectionChange = false;
     LoadNozzleIntoInputs(selectedNozzleIndex);
 
     AutoPreviewNozzle();
     MarkDirty();
-  }
-
-  private void OnNozzleSelected(object? sender, EventArgs e)
-  {
-    if (internalNozzleSelectionChange) return;
-
-    int idx = nozzleList.SelectedIndex;
-    if (idx < 0 || idx >= nozzles.Count) return;
-
-    selectedNozzleIndex = idx;
-    LoadNozzleIntoInputs(idx);
-    AutoPreviewNozzle();
   }
 
   private void LoadNozzleIntoInputs(int idx)
@@ -990,15 +1060,19 @@ public class ProjectEditorForm : Form
 
   private void RefreshNozzleList()
   {
-    nozzleList.BeginUpdate();
-    nozzleList.Items.Clear();
-
+    nozzleGrid.Rows.Clear();
     foreach (var n in nozzles)
-      nozzleList.Items.Add($"{n.Id} | {n.Brand} nozzel typ {n.NozzelTypbezeichnung} ({n.AngleSprayDeg:0.###}°) {n.MaxVolFlowLMin:0.##} l/min");
+    {
+      nozzleGrid.Rows.Add(
+        n.Id,
+        n.Brand,
+        n.NozzelTypbezeichnung,
+        $"{n.AngleSprayDeg:0.###}°",
+        $"{n.MaxVolFlowLMin:0.##} l/min"
+      );
+    }
 
-    nozzleList.EndUpdate();
-
-    if (nozzleList.Tag is Label f) f.Text = $"Anzahl: {nozzles.Count}";
+    if (nozzleGrid.Tag is Label f) f.Text = $"Anzahl: {nozzles.Count}";
 
     RefreshCoolingBankNozzleDropdown();
   }
@@ -1048,7 +1122,7 @@ public class ProjectEditorForm : Form
 
     RefreshCoolingBankList();
     internalCbSelectionChange = true;
-    cbList.SelectedIndex = selectedCbIndex;
+    SelectCoolingBankGridRow(selectedCbIndex);
     internalCbSelectionChange = false;
 
     cbOutput.Text = BuildCoolingBankBlock(data);
@@ -1059,7 +1133,7 @@ public class ProjectEditorForm : Form
 
   private void CopySelectedCoolingBank()
   {
-    int index = cbList.SelectedIndex;
+    int index = selectedCbIndex;
     if (index < 0 || index >= coolingBanks.Count)
     {
       MessageBox.Show(this, "Bitte zuerst eine CoolingBank auswählen.", "CoolingBank kopieren",
@@ -1098,7 +1172,7 @@ public class ProjectEditorForm : Form
     try
     {
       RefreshCoolingBankList();
-      cbList.SelectedIndex = selectedCbIndex;
+      SelectCoolingBankGridRow(selectedCbIndex);
     }
     finally { internalCbSelectionChange = false; }
 
@@ -1141,25 +1215,13 @@ public class ProjectEditorForm : Form
 
     selectedCbIndex = Math.Max(0, selectedCbIndex - 1);
     internalCbSelectionChange = true;
-    cbList.SelectedIndex = selectedCbIndex;
+    SelectCoolingBankGridRow(selectedCbIndex);
     internalCbSelectionChange = false;
     LoadCoolingBankIntoInputs(selectedCbIndex);
 
     AutoPreviewCoolingBank();
     RefreshRollParamBankDropdowns();
     MarkDirty();
-  }
-
-  private void OnCoolingBankSelected(object? sender, EventArgs e)
-  {
-    if (internalCbSelectionChange) return;
-
-    int idx = cbList.SelectedIndex;
-    if (idx < 0 || idx >= coolingBanks.Count) return;
-
-    selectedCbIndex = idx;
-    LoadCoolingBankIntoInputs(idx);
-    AutoPreviewCoolingBank();
   }
 
   private void LoadCoolingBankIntoInputs(int idx)
@@ -1195,7 +1257,7 @@ public class ProjectEditorForm : Form
   private void ClearCoolingBankInputs()
   {
     selectedCbIndex = -1;
-    cbList.ClearSelected();
+    cbGrid.ClearSelection();
 
     cbIdInput.Clear();
     cbTypeBankInput.Clear();
@@ -1342,15 +1404,11 @@ public class ProjectEditorForm : Form
     bool prev = internalCbSelectionChange;
     internalCbSelectionChange = true;
 
-    cbList.BeginUpdate();
-    cbList.Items.Clear();
+    cbGrid.Rows.Clear();
     foreach (var b in coolingBanks)
-      cbList.Items.Add($"{b.Id} | {b.TypeBank} | {b.NoNozzel} Nozzles | {b.Zones.Count} Zonen");
-    cbList.EndUpdate();
+      cbGrid.Rows.Add(b.Id, b.TypeBank, b.NoNozzel, b.Zones.Count);
 
-    internalCbSelectionChange = prev;
-
-    if (cbList.Tag is Label f) f.Text = $"Anzahl: {coolingBanks.Count}";
+    if (cbGrid.Tag is Label f) f.Text = $"Anzahl: {coolingBanks.Count}";
   }
 
   // =========================================================
@@ -1940,7 +1998,7 @@ public class ProjectEditorForm : Form
     if (nozzles.Count > 0)
     {
       internalNozzleSelectionChange = true;
-      nozzleList.SelectedIndex = 0;
+      selectedNozzleIndex = 0;
       internalNozzleSelectionChange = false;
       LoadNozzleIntoInputs(0);
     }
@@ -1952,7 +2010,7 @@ public class ProjectEditorForm : Form
     if (coolingBanks.Count > 0)
     {
       internalCbSelectionChange = true;
-      cbList.SelectedIndex = 0;
+      selectedCbIndex = 0;
       internalCbSelectionChange = false;
       LoadCoolingBankIntoInputs(0);
     }
