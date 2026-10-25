@@ -115,6 +115,8 @@ public class ProjectEditorForm : Form
   private readonly TextBox[] rpBankXPosInputs = { new(), new(), new(), new(), new(), new(), new(), new() };
   private readonly TextBox[] rpBankYPosInputs = { new(), new(), new(), new(), new(), new(), new(), new() };
   private readonly TextBox[] rpBankAngleInputs = { new(), new(), new(), new(), new(), new(), new(), new() };
+  private readonly TextBox[] rpBankFacFlowInputs = { new(), new(), new(), new(), new(), new(), new(), new() };
+  private readonly TextBox[] rpBankCommentInputs = { new(), new(), new(), new(), new(), new(), new(), new() };
 
   private readonly TextBox rpOutput = new()
   {
@@ -511,17 +513,19 @@ public class ProjectEditorForm : Form
     {
       Dock = DockStyle.Top,
       AutoSize = true,
-      ColumnCount = 6,
+      ColumnCount = 8,
       RowCount = 9,
       Margin = new Padding(0, 8, 0, 8)
     };
 
-    banks.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 70));
+    banks.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 60));
+    banks.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 18));
+    banks.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 8));
+    banks.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10));
+    banks.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10));
+    banks.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12));
+    banks.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 12));
     banks.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30));
-    banks.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15));
-    banks.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 18));
-    banks.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 18));
-    banks.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 19));
 
     banks.Controls.Add(new Label { Text = "bank_x", AutoSize = true }, 0, 0);
     banks.Controls.Add(new Label { Text = "Typ (CoolingBank)", AutoSize = true }, 1, 0);
@@ -529,6 +533,8 @@ public class ProjectEditorForm : Form
     banks.Controls.Add(new Label { Text = "XPos [m]", AutoSize = true }, 3, 0);
     banks.Controls.Add(new Label { Text = "YPos [m]", AutoSize = true }, 4, 0);
     banks.Controls.Add(new Label { Text = "AngleSlope [°]", AutoSize = true }, 5, 0);
+    banks.Controls.Add(new Label { Text = "FacFlow2Strip", AutoSize = true }, 6, 0);
+    banks.Controls.Add(new Label { Text = "Kommentar", AutoSize = true }, 7, 0);
 
     for (int i = 0; i < 8; i++)
     {
@@ -539,6 +545,8 @@ public class ProjectEditorForm : Form
       rpBankXPosInputs[i].Dock = DockStyle.Fill;
       rpBankYPosInputs[i].Dock = DockStyle.Fill;
       rpBankAngleInputs[i].Dock = DockStyle.Fill;
+      rpBankFacFlowInputs[i].Dock = DockStyle.Fill;
+      rpBankCommentInputs[i].Dock = DockStyle.Fill;
 
       banks.Controls.Add(new Label { Text = $"bank_{i}", AutoSize = true, Anchor = AnchorStyles.Left }, 0, row);
       banks.Controls.Add(rpBankTypeInputs[i], 1, row);
@@ -546,6 +554,8 @@ public class ProjectEditorForm : Form
       banks.Controls.Add(rpBankXPosInputs[i], 3, row);
       banks.Controls.Add(rpBankYPosInputs[i], 4, row);
       banks.Controls.Add(rpBankAngleInputs[i], 5, row);
+      banks.Controls.Add(rpBankFacFlowInputs[i], 6, row);
+      banks.Controls.Add(rpBankCommentInputs[i], 7, row);
     }
 
     panel.Controls.Add(banks, 0, 4);
@@ -645,6 +655,8 @@ public class ProjectEditorForm : Form
       rpBankXPosInputs[i].Enabled = active;
       rpBankYPosInputs[i].Enabled = active;
       rpBankAngleInputs[i].Enabled = active;
+      rpBankFacFlowInputs[i].Enabled = active;
+      rpBankCommentInputs[i].Enabled = active;
     }
   }
 
@@ -703,6 +715,8 @@ public class ProjectEditorForm : Form
       rpBankXPosInputs[i].TextChanged += (_, _) => AutoPreviewRollParam();
       rpBankYPosInputs[i].TextChanged += (_, _) => AutoPreviewRollParam();
       rpBankAngleInputs[i].TextChanged += (_, _) => AutoPreviewRollParam();
+      rpBankFacFlowInputs[i].TextChanged += (_, _) => AutoPreviewRollParam();
+      rpBankCommentInputs[i].TextChanged += (_, _) => AutoPreviewRollParam();
     }
   }
 
@@ -1406,7 +1420,9 @@ public class ProjectEditorForm : Form
         Index = b.Index,
         XPos = b.XPos,
         YPos = b.YPos,
-        AngleSlope = b.AngleSlope
+        AngleSlope = b.AngleSlope,
+        FacFlow2Strip = b.FacFlow2Strip,
+        Comment = b.Comment
       });
     }
 
@@ -1482,6 +1498,8 @@ public class ProjectEditorForm : Form
         rpBankAngleInputs[i].Text =
             (b.AngleSlope * (180.0 / Math.PI))
             .ToString("0.#########", CultureInfo.InvariantCulture);
+        rpBankFacFlowInputs[i].Text = b.FacFlow2Strip.ToString("0.###", CultureInfo.InvariantCulture);
+        rpBankCommentInputs[i].Text = b.Comment;
       }
       else
       {
@@ -1490,6 +1508,8 @@ public class ProjectEditorForm : Form
         rpBankXPosInputs[i].Clear();
         rpBankYPosInputs[i].Clear();
         rpBankAngleInputs[i].Clear();
+        rpBankFacFlowInputs[i].Text = "0.80";
+        rpBankCommentInputs[i].Text = GetDefaultRollBankComment(i);
       }
     }
 
@@ -1512,6 +1532,8 @@ public class ProjectEditorForm : Form
       rpBankXPosInputs[i].Clear();
       rpBankYPosInputs[i].Clear();
       rpBankAngleInputs[i].Clear();
+      rpBankFacFlowInputs[i].Text = "0.80";
+      rpBankCommentInputs[i].Text = GetDefaultRollBankComment(i);
     }
 
     rpOutput.Clear();
@@ -1567,29 +1589,32 @@ public class ProjectEditorForm : Form
         return false;
       }
 
+      if (!TryReadDouble(
+              rpBankFacFlowInputs[i],
+              $"bank_{i}_FacFlow2Strip",
+              showValidation,
+              out double facFlow))
+      {
+        return false;
+      }
+
       data.Banks.Add(new RollParamBankData
       {
         BankType = bankType,
         Index = index,
         XPos = xPos,
         YPos = yPos,
-        AngleSlope = angleDeg * (Math.PI / 180.0)
+        AngleSlope = angleDeg * (Math.PI / 180.0),
+        FacFlow2Strip = facFlow,
+        Comment = rpBankCommentInputs[i].Text.Trim()
       });
     }
-
     return true;
   }
 
   private string BuildRollParamBlock(RollParamData rp)
   {
     var ci = CultureInfo.InvariantCulture;
-
-    string[] bankComments =
-    {
-            "WTET roll cool spray entry side  lubrication",
-            "WTEB roll gap spray entry side  lubrication",
-            "WTB spray entry side lower row S1"
-        };
 
     int keyWidth = Math.Max("typeRoll".Length, "noBank".Length);
     int integerPartWidth = 1;
@@ -1601,7 +1626,7 @@ public class ProjectEditorForm : Form
                 bank.XPos,
                 bank.YPos,
                 bank.AngleSlope,
-                0.80
+                bank.FacFlow2Strip
             };
 
       foreach (double value in values)
@@ -1663,9 +1688,7 @@ public class ProjectEditorForm : Form
     {
       var b = rp.Banks[i];
       string prefix = $"bank_{i}";
-      string bankComment = i < bankComments.Length ? bankComments[i] : "cooling bank";
-
-      AddLine(prefix, b.BankType.PadRight(numberWidth), bankComment);
+      AddLine(prefix, b.BankType.PadRight(numberWidth), b.Comment);
 
       AddInteger(
           $"{prefix}_Index",
@@ -1699,7 +1722,7 @@ public class ProjectEditorForm : Form
 
       AddDecimal(
           $"{prefix}_FacFlow2Strip",
-          0.80,
+          b.FacFlow2Strip,
           "");
 
       lines.Add("  ");
@@ -1725,6 +1748,14 @@ public class ProjectEditorForm : Form
 
     if (rpList.Tag is Label f) f.Text = $"Anzahl: {rollParams.Count}";
   }
+
+  private static string GetDefaultRollBankComment(int i) => i switch
+  {
+    0 => "WTET roll cool spray entry side  lubrication",
+    1 => "WTEB roll gap spray entry side  lubrication",
+    2 => "WTB spray entry side lower row S1",
+    _ => "cooling bank"
+  };
 
   // =========================================================
   // Generic helpers
@@ -2102,6 +2133,8 @@ public class ProjectEditorForm : Form
         lines.Add($"{p}.xpos={b.XPos.ToString("R", ci)}");
         lines.Add($"{p}.ypos={b.YPos.ToString("R", ci)}");
         lines.Add($"{p}.angle={b.AngleSlope.ToString("R", ci)}");
+        lines.Add($"{p}.facFlow2Strip={b.FacFlow2Strip.ToString("R", ci)}");
+        lines.Add($"{p}.comment={b.Comment}");
       }
 
       lines.Add("[/ROLLPARAM]");
@@ -2212,9 +2245,11 @@ public class ProjectEditorForm : Form
               Index = ReadProjectInt(values, $"{p}.index"),
               XPos = ReadProjectDouble(values, $"{p}.xpos"),
               YPos = ReadProjectDouble(values, $"{p}.ypos"),
-              AngleSlope = ReadProjectDouble(values, $"{p}.angle")
+              AngleSlope = ReadProjectDouble(values, $"{p}.angle"),
+              FacFlow2Strip = values.TryGetValue($"{p}.facFlow2Strip", out var ff)  ? ReadProjectDouble(values, $"{p}.facFlow2Strip") : 0.80,
+              Comment = values.TryGetValue($"{p}.comment", out var c) ? c : GetDefaultRollBankComment(i)
             });
-          }
+           }
 
           result.RollParams.Add(rp);
         }
@@ -2397,7 +2432,9 @@ public class RollParamBankData
   public double XPos { get; set; }
   public double YPos { get; set; }
   public double AngleSlope { get; set; }
-}
+  public double FacFlow2Strip { get; set; }
+  public string Comment { get; set; } = "";
+} 
 
 public class RollParamData
 {
