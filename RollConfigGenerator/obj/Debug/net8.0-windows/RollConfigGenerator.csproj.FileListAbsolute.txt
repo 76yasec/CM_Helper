@@ -14,3 +14,4 @@ C:\Users\seceryas\source\repos\WindowsFormsApp1\RollConfigGenerator\obj\Debug\ne
 C:\Users\seceryas\source\repos\WindowsFormsApp1\RollConfigGenerator\obj\Debug\net8.0-windows\RollConfigGenerator.pdb
 C:\Users\seceryas\source\repos\WindowsFormsApp1\RollConfigGenerator\obj\Debug\net8.0-windows\RollConfigGenerator.genruntimeconfig.cache
 C:\Users\seceryas\source\repos\WindowsFormsApp1\RollConfigGenerator\obj\Debug\net8.0-windows\ref\RollConfigGenerator.dll
+C:\Users\seceryas\source\repos\WindowsFormsApp1\RollConfigGenerator\obj\Debug\net8.0-windows\RollConfigGenerator.sourcelink.json

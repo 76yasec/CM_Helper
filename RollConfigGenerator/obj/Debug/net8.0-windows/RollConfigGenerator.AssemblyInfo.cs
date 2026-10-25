@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RollConfigGenerator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+97cf11ce56ccb690a5c0428f1551cf06a9902170")]
 [assembly: System.Reflection.AssemblyProductAttribute("RollConfigGenerator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RollConfigGenerator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

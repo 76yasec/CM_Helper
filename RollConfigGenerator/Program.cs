@@ -98,13 +98,9 @@ public class ProjectEditorForm : Form
   // ---------------------- RollParam ----------------------
   private readonly TextBox rpIdInput = new() { Text = "workRollParam" };
   private readonly ComboBox rpTypeRollInput = new() { DropDownStyle = ComboBoxStyle.DropDownList, Dock = DockStyle.Fill };
-  private readonly NumericUpDown rpBankCountInput = new() { Minimum = 1, Maximum = 12, Value = 1, Dock = DockStyle.Fill };
+  private readonly NumericUpDown rpBankCountInput = new() { Minimum = 1, Maximum = 8, Value = 1, Dock = DockStyle.Fill };
 
   private readonly ComboBox[] rpBankTypeInputs = {
-        new() { DropDownStyle = ComboBoxStyle.DropDownList },
-        new() { DropDownStyle = ComboBoxStyle.DropDownList },
-        new() { DropDownStyle = ComboBoxStyle.DropDownList },
-        new() { DropDownStyle = ComboBoxStyle.DropDownList },
         new() { DropDownStyle = ComboBoxStyle.DropDownList },
         new() { DropDownStyle = ComboBoxStyle.DropDownList },
         new() { DropDownStyle = ComboBoxStyle.DropDownList },
@@ -115,10 +111,10 @@ public class ProjectEditorForm : Form
         new() { DropDownStyle = ComboBoxStyle.DropDownList }
     };
 
-  private readonly TextBox[] rpBankIndexInputs = { new(), new(), new(), new(), new(), new(), new(), new(), new(), new(), new(), new() };
-  private readonly TextBox[] rpBankXPosInputs = { new(), new(), new(), new(), new(), new(), new(), new(), new(), new(), new(), new() };
-  private readonly TextBox[] rpBankYPosInputs = { new(), new(), new(), new(), new(), new(), new(), new(), new(), new(), new(), new() };
-  private readonly TextBox[] rpBankAngleInputs = { new(), new(), new(), new(), new(), new(), new(), new(), new(), new(), new(), new() };
+  private readonly TextBox[] rpBankIndexInputs = { new(), new(), new(), new(), new(), new(), new(), new() };
+  private readonly TextBox[] rpBankXPosInputs = { new(), new(), new(), new(), new(), new(), new(), new() };
+  private readonly TextBox[] rpBankYPosInputs = { new(), new(), new(), new(), new(), new(), new(), new() };
+  private readonly TextBox[] rpBankAngleInputs = { new(), new(), new(), new(), new(), new(), new(), new() };
 
   private readonly TextBox rpOutput = new()
   {
@@ -516,7 +512,7 @@ public class ProjectEditorForm : Form
       Dock = DockStyle.Top,
       AutoSize = true,
       ColumnCount = 6,
-      RowCount = 13,
+      RowCount = 9,
       Margin = new Padding(0, 8, 0, 8)
     };
 
@@ -534,7 +530,7 @@ public class ProjectEditorForm : Form
     banks.Controls.Add(new Label { Text = "YPos [m]", AutoSize = true }, 4, 0);
     banks.Controls.Add(new Label { Text = "AngleSlope [°]", AutoSize = true }, 5, 0);
 
-    for (int i = 0; i < 12; i++)
+    for (int i = 0; i < 8; i++)
     {
       int row = i + 1;
 
@@ -571,6 +567,7 @@ public class ProjectEditorForm : Form
     panel.Controls.Add(buttons, 0, 5);
     panel.SetColumnSpan(buttons, 2);
 
+    rpOutput.MinimumSize = new Size(0, 320);
     panel.Controls.Add(rpOutput, 0, 6);
     panel.SetColumnSpan(rpOutput, 2);
 
@@ -640,7 +637,7 @@ public class ProjectEditorForm : Form
   {
     int count = (int)rpBankCountInput.Value;
 
-    for (int i = 0; i < 12; i++)
+    for (int i = 0; i < 8; i++)
     {
       bool active = i < count;
       rpBankTypeInputs[i].Enabled = active;
@@ -699,7 +696,7 @@ public class ProjectEditorForm : Form
       AutoPreviewRollParam();
     };
 
-    for (int i = 0; i < 12; i++)
+    for (int i = 0; i < 8; i++)
     {
       rpBankTypeInputs[i].SelectedIndexChanged += (_, _) => AutoPreviewRollParam();
       rpBankIndexInputs[i].TextChanged += (_, _) => AutoPreviewRollParam();
@@ -1471,9 +1468,9 @@ public class ProjectEditorForm : Form
 
     rpIdInput.Text = rp.ParamName;
     SelectComboValue(rpTypeRollInput, rp.TypeRoll);
-    rpBankCountInput.Value = Math.Clamp(rp.Banks.Count, 1, 12);
+    rpBankCountInput.Value = Math.Clamp(rp.Banks.Count, 1, 8);
 
-    for (int i = 0; i < 12; i++)
+    for (int i = 0; i < 8; i++)
     {
       if (i < rp.Banks.Count)
       {
@@ -1508,7 +1505,7 @@ public class ProjectEditorForm : Form
     rpTypeRollInput.SelectedIndex = 0;
     rpBankCountInput.Value = 1;
 
-    for (int i = 0; i < 12; i++)
+    for (int i = 0; i < 8; i++)
     {
       rpBankTypeInputs[i].SelectedIndex = -1;
       rpBankIndexInputs[i].Clear();
