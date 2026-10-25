@@ -577,7 +577,7 @@ public class ProjectEditorForm : Form
     {
       Dock = DockStyle.Fill,
       ColumnCount = 2,
-      RowCount = 7,
+      RowCount = 14,
       Padding = new Padding(12)
     };
 
@@ -603,7 +603,7 @@ public class ProjectEditorForm : Form
     var banks = new TableLayoutPanel
     {
       Dock = DockStyle.Top,
-      AutoSize = true,
+      AutoSize = false,
       ColumnCount = 8,
       RowCount = 9,
       Margin = new Padding(0, 8, 0, 8)
@@ -627,6 +627,12 @@ public class ProjectEditorForm : Form
     banks.Controls.Add(new Label { Text = "FacFlow2Strip", AutoSize = true }, 6, 0);
     banks.Controls.Add(new Label { Text = "Kommentar", AutoSize = true }, 7, 0);
 
+    // Zeilenhöhen festziehen
+    banks.RowStyles.Clear();
+    banks.RowStyles.Add(new RowStyle(SizeType.Absolute, 28)); // Header
+    for (int r = 1; r <= 8; r++)
+      banks.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
+
     for (int i = 0; i < 8; i++)
     {
       int row = i + 1;
@@ -639,7 +645,10 @@ public class ProjectEditorForm : Form
       rpBankFacFlowInputs[i].Dock = DockStyle.Fill;
       rpBankCommentInputs[i].Dock = DockStyle.Fill;
 
-      banks.Controls.Add(new Label { Text = $"bank_{i}", AutoSize = true, Anchor = AnchorStyles.Left }, 0, row);
+      rpBankTypeInputs[i].Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      rpBankIndexInputs[i].Anchor = AnchorStyles.Left | AnchorStyles.Right;
+
+      banks.Controls.Add(new Label { Text = $"bank_{i}", AutoSize = true, Anchor = AnchorStyles.Left  }, 0, row);
       banks.Controls.Add(rpBankTypeInputs[i], 1, row);
       banks.Controls.Add(rpBankIndexInputs[i], 2, row);
       banks.Controls.Add(rpBankXPosInputs[i], 3, row);
@@ -648,8 +657,8 @@ public class ProjectEditorForm : Form
       banks.Controls.Add(rpBankFacFlowInputs[i], 6, row);
       banks.Controls.Add(rpBankCommentInputs[i], 7, row);
     }
-
-    panel.Controls.Add(banks, 0, 4);
+    banks.MinimumSize = new Size(0, 280);
+    panel.Controls.Add(banks, 1, 3);
     panel.SetColumnSpan(banks, 2);
 
     var buttons = new FlowLayoutPanel { Dock = DockStyle.Fill, AutoSize = true, WrapContents = true };
