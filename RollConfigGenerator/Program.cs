@@ -128,8 +128,17 @@ public class ProjectEditorForm : Form
     Font = new Font("Consolas", 10),
     BackColor = Color.White
   };
-
-  private readonly ListBox rpList = new() { Dock = DockStyle.Fill };
+  private readonly DataGridView rpGrid = new()
+  {
+    Dock = DockStyle.Fill,
+    ReadOnly = true,
+    AllowUserToAddRows = false,
+    AllowUserToDeleteRows = false,
+    SelectionMode = DataGridViewSelectionMode.FullRowSelect,
+    MultiSelect = false,
+    RowHeadersVisible = false
+  };
+ 
   private readonly List<RollParamData> rollParams = new();
   private int selectedRpIndex = -1;
   private bool internalRpSelectionChange = false;
@@ -606,13 +615,20 @@ public class ProjectEditorForm : Form
       TextAlign = ContentAlignment.MiddleLeft,
       Font = new Font(Font, FontStyle.Bold)
     };
-
-    rpList.SelectedIndexChanged += OnRollParamSelected;
+    
+    rpGrid.Columns.Add("ParamName", "ParamName");
+    rpGrid.Columns.Add("TypeRoll", "typeRoll");
+    rpGrid.Columns.Add("NoBank", "noBank");
+    rpGrid.Columns["ParamName"]!.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+    rpGrid.Columns["TypeRoll"]!.Width = 90;
+    rpGrid.Columns["NoBank"]!.Width = 90;
+    rpGrid.SelectionChanged += OnRollParamGridSelectionChanged;
+    
     var footer = new Label { Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleLeft };
-    rpList.Tag = footer;
+    rpGrid.Tag = footer;
 
     panel.Controls.Add(title, 0, 0);
-    panel.Controls.Add(rpList, 0, 1);
+    panel.Controls.Add(rpGrid, 0, 1);
     panel.Controls.Add(footer, 0, 2);
 
     return panel;
@@ -1382,7 +1398,7 @@ public class ProjectEditorForm : Form
 
     RefreshRollParamList();
     internalRpSelectionChange = true;
-    rpList.SelectedIndex = selectedRpIndex;
+    SelectRollParamGridRow(selectedRpIndex);
     internalRpSelectionChange = false;
 
     rpOutput.Text = BuildRollParamBlock(data);
@@ -1391,7 +1407,7 @@ public class ProjectEditorForm : Form
 
   private void CopySelectedRollParam()
   {
-    int idx = rpList.SelectedIndex;
+    int idx = selectedRpIndex;
     if (idx < 0 || idx >= rollParams.Count)
     {
       MessageBox.Show(this, "Bitte zuerst ein RollParam auswählen.", "RollParam kopieren",
@@ -1433,7 +1449,7 @@ public class ProjectEditorForm : Form
     try
     {
       RefreshRollParamList();
-      rpList.SelectedIndex = selectedRpIndex;
+      SelectRollParamGridRow(selectedRpIndex);
     }
     finally { internalRpSelectionChange = false; }
 
@@ -1458,7 +1474,7 @@ public class ProjectEditorForm : Form
 
     selectedRpIndex = Math.Max(0, selectedRpIndex - 1);
     internalRpSelectionChange = true;
-    rpList.SelectedIndex = selectedRpIndex;
+    SelectRollParamGridRow(selectedRpIndex);
     internalRpSelectionChange = false;
 
     LoadRollParamIntoInputs(selectedRpIndex);
@@ -1466,16 +1482,24 @@ public class ProjectEditorForm : Form
     MarkDirty();
   }
 
-  private void OnRollParamSelected(object? sender, EventArgs e)
+  private void OnRollParamGridSelectionChanged(object? sender, EventArgs e)
   {
     if (internalRpSelectionChange) return;
-
-    int idx = rpList.SelectedIndex;
+    if (rpGrid.CurrentRow == null) return;
+    int idx = rpGrid.CurrentRow.Index;
     if (idx < 0 || idx >= rollParams.Count) return;
 
     selectedRpIndex = idx;
     LoadRollParamIntoInputs(idx);
     AutoPreviewRollParam();
+  }
+  
+  private void SelectRollParamGridRow(int idx)
+  {
+    if (idx < 0 || idx >= rpGrid.Rows.Count) return;
+    rpGrid.ClearSelection();
+    rpGrid.Rows[idx].Selected = true;
+    rpGrid.CurrentCell = rpGrid.Rows[idx].Cells[0];
   }
 
   private void LoadRollParamIntoInputs(int idx)
@@ -1519,7 +1543,7 @@ public class ProjectEditorForm : Form
   private void ClearRollParamInputs()
   {
     selectedRpIndex = -1;
-    rpList.ClearSelected();
+    rpGrid.ClearSelection();
 
     rpIdInput.Text = "workRollParam";
     rpTypeRollInput.SelectedIndex = 0;
@@ -1738,15 +1762,11 @@ public class ProjectEditorForm : Form
     bool prev = internalRpSelectionChange;
     internalRpSelectionChange = true;
 
-    rpList.BeginUpdate();
-    rpList.Items.Clear();
+    rpGrid.Rows.Clear();
     foreach (var rp in rollParams)
-      rpList.Items.Add($"{rp.ParamName} | {rp.TypeRoll} | noBank={rp.Banks.Count}");
-    rpList.EndUpdate();
+      rpGrid.Rows.Add(rp.ParamName, rp.TypeRoll, rp.Banks.Count);internalRpSelectionChange = prev;
 
-    internalRpSelectionChange = prev;
-
-    if (rpList.Tag is Label f) f.Text = $"Anzahl: {rollParams.Count}";
+    if (rpGrid.Tag is Label f) f.Text = $"Anzahl: {rollParams.Count}";
   }
 
   private static string GetDefaultRollBankComment(int i) => i switch
@@ -1944,7 +1964,7 @@ public class ProjectEditorForm : Form
     if (rollParams.Count > 0)
     {
       internalRpSelectionChange = true;
-      rpList.SelectedIndex = 0;
+      SelectRollParamGridRow(0);
       internalRpSelectionChange = false;
       LoadRollParamIntoInputs(0);
     }
