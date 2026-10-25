@@ -1,0 +1,65 @@
+l_00AT
+env{                          // Lechler nozzel typ 660.844.17 (60°) 21.96 l/min  
+    typeNozzel   lech_00AT    
+    
+    minVolFlow        0.0     // [m3/s]  nozzel min volume flow
+    maxVolFlow        3.66e-4 // [m3/s]  nozzel max volume flow  
+    refPressure       6.0     // [N/m*m] referenze pressure  on max flow
+    angleSpray        1.047   // [ rad ] angle of the spray 
+    
+} // end of param l_00AT
+
+l_00AB
+env{                          // Lechler nozzel typ 660.844.17 (30°) 21.96 l/min  
+    typeNozzel   lech_00AB    
+    
+    minVolFlow        0.0     // [m3/s]  nozzel min volume flow
+    maxVolFlow        3.66e-4 // [m3/s]  nozzel max volume flow  
+    refPressure       6.0     // [N/m*m] referenze pressure  on max flow
+    angleSpray        0.524   // [ rad ] angle of the spray 
+    
+} // end of param l_00AB
+
+l_000C
+env{                          // Lechler nozzel typ 660.984.17 (60°) 43.93 l/min  
+    typeNozzel   lech_000C    
+    
+    minVolFlow        0.0     // [m3/s]  nozzel min volume flow
+    maxVolFlow        7.32e-4 // [m3/s]  nozzel max volume flow  
+    refPressure       6.0     // [N/m*m] referenze pressure  on max flow
+    angleSpray        1.047   // [ rad ] angle of the spray 
+    
+} // end of param l_000C
+
+l_00G4
+env{                          // Lechler nozzel typ 698.93A.16.20.10.H (20°) 36.36 l/min  
+    typeNozzel   lech_00G4    
+    
+    minVolFlow        0.0     // [m3/s]  nozzel min volume flow
+    maxVolFlow        6.06e-4 // [m3/s]  nozzel max volume flow  
+    refPressure       6.0     // [N/m*m] referenze pressure  on max flow
+    angleSpray        0.349   // [ rad ] angle of the spray 
+    
+} // end of param l_00G4
+
+l_0B4A
+env{                          // Lechler nozzel typ 698.99P.F1.45.80.H (45°) 69.7 l/min  
+    typeNozzel   lech_00G4    
+    
+    minVolFlow        0.0     // [m3/s]  nozzel min volume flow
+    maxVolFlow        1.16e-3 // [m3/s]  nozzel max volume flow  
+    refPressure       6.0     // [N/m*m] referenze pressure  on max flow
+    angleSpray        0.785   // [ rad ] angle of the spray 
+    
+} // end of param l_0B4A
+
+l_0B4B
+env{                          // Lechler nozzel typ 698.11A.16.45.72.H (45°) 34.85 l/min  
+    typeNozzel   lech_0B4B    
+    
+    minVolFlow        0.0     // [m3/s]  nozzel min volume flow
+    maxVolFlow        5.81e-4 // [m3/s]  nozzel max volume flow  
+    refPressure       6.0     // [N/m*m] referenze pressure  on max flow
+    angleSpray        0.785   // [ rad ] angle of the spray 
+    
+} // end of param l_0B4B

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37806.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KühlbalkenHelper", "WindowsFormsApp1\KühlbalkenHelper.csproj", "{B1AF328D-FA16-47A7-8989-15956EE9BFCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RollConfigGenerator", "RollConfigGenerator\RollConfigGenerator.csproj", "{94A07E23-7ABC-48B8-AF15-6034E1833771}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1AF328D-FA16-47A7-8989-15956EE9BFCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1AF328D-FA16-47A7-8989-15956EE9BFCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1AF328D-FA16-47A7-8989-15956EE9BFCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1AF328D-FA16-47A7-8989-15956EE9BFCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94A07E23-7ABC-48B8-AF15-6034E1833771}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94A07E23-7ABC-48B8-AF15-6034E1833771}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94A07E23-7ABC-48B8-AF15-6034E1833771}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94A07E23-7ABC-48B8-AF15-6034E1833771}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BDFF93D3-8667-4C9F-B72D-27E11129A1D0}
+	EndGlobalSection
+EndGlobal

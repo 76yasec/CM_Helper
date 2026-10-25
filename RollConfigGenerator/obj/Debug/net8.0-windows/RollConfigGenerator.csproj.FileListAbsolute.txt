@@ -1,0 +1,16 @@
+C:\Users\seceryas\source\repos\WindowsFormsApp1\RollConfigGenerator\bin\Debug\net8.0-windows\RollConfigGenerator.exe
+C:\Users\seceryas\source\repos\WindowsFormsApp1\RollConfigGenerator\bin\Debug\net8.0-windows\RollConfigGenerator.deps.json
+C:\Users\seceryas\source\repos\WindowsFormsApp1\RollConfigGenerator\bin\Debug\net8.0-windows\RollConfigGenerator.runtimeconfig.json
+C:\Users\seceryas\source\repos\WindowsFormsApp1\RollConfigGenerator\bin\Debug\net8.0-windows\RollConfigGenerator.dll
+C:\Users\seceryas\source\repos\WindowsFormsApp1\RollConfigGenerator\bin\Debug\net8.0-windows\RollConfigGenerator.pdb
+C:\Users\seceryas\source\repos\WindowsFormsApp1\RollConfigGenerator\obj\Debug\net8.0-windows\RollConfigGenerator.Form1.resources
+C:\Users\seceryas\source\repos\WindowsFormsApp1\RollConfigGenerator\obj\Debug\net8.0-windows\RollConfigGenerator.csproj.GenerateResource.cache
+C:\Users\seceryas\source\repos\WindowsFormsApp1\RollConfigGenerator\obj\Debug\net8.0-windows\RollConfigGenerator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\seceryas\source\repos\WindowsFormsApp1\RollConfigGenerator\obj\Debug\net8.0-windows\RollConfigGenerator.AssemblyInfoInputs.cache
+C:\Users\seceryas\source\repos\WindowsFormsApp1\RollConfigGenerator\obj\Debug\net8.0-windows\RollConfigGenerator.AssemblyInfo.cs
+C:\Users\seceryas\source\repos\WindowsFormsApp1\RollConfigGenerator\obj\Debug\net8.0-windows\RollConfigGenerator.csproj.CoreCompileInputs.cache
+C:\Users\seceryas\source\repos\WindowsFormsApp1\RollConfigGenerator\obj\Debug\net8.0-windows\RollConfigGenerator.dll
+C:\Users\seceryas\source\repos\WindowsFormsApp1\RollConfigGenerator\obj\Debug\net8.0-windows\refint\RollConfigGenerator.dll
+C:\Users\seceryas\source\repos\WindowsFormsApp1\RollConfigGenerator\obj\Debug\net8.0-windows\RollConfigGenerator.pdb
+C:\Users\seceryas\source\repos\WindowsFormsApp1\RollConfigGenerator\obj\Debug\net8.0-windows\RollConfigGenerator.genruntimeconfig.cache
+C:\Users\seceryas\source\repos\WindowsFormsApp1\RollConfigGenerator\obj\Debug\net8.0-windows\ref\RollConfigGenerator.dll

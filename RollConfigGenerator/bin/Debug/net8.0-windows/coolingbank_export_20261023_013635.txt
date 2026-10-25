@@ -1,0 +1,348 @@
+
+spray_AT
+env{
+    typeBank     nozTyp33_AT  // zone 1: 33 nozzles a 21.96 l/min bankLength   1.664 m
+    noNozzel     33
+  
+    
+    switchWidth  switch_A     // steps for switching
+    
+    nozzel_0_dis 0.052        // [m] from left to right
+    nozzel_0    l_00AT
+    nozzel_1_dis 0.052
+    nozzel_1    l_00AT
+    nozzel_2_dis 0.052
+    nozzel_2    l_00AT
+    nozzel_3_dis 0.052
+    nozzel_3    l_00AT
+    nozzel_4_dis 0.052
+    nozzel_4    l_00AT
+    nozzel_5_dis 0.052
+    nozzel_5    l_00AT
+    nozzel_6_dis 0.052
+    nozzel_6    l_00AT
+    nozzel_7_dis 0.052
+    nozzel_7    l_00AT
+    nozzel_8_dis 0.052
+    nozzel_8    l_00AT
+    nozzel_9_dis 0.052
+    nozzel_9    l_00AT
+    nozzel_10_dis 0.052
+    nozzel_10   l_00AT
+    nozzel_11_dis 0.052
+    nozzel_11   l_00AT
+    nozzel_12_dis 0.052
+    nozzel_12   l_00AT
+    nozzel_13_dis 0.052
+    nozzel_13   l_00AT
+    nozzel_14_dis 0.052
+    nozzel_14   l_00AT
+    nozzel_15_dis 0.052
+    nozzel_15   l_00AT
+    nozzel_16_dis 0.052
+    nozzel_16   l_00AT
+    nozzel_17_dis 0.052
+    nozzel_17   l_00AT
+    nozzel_18_dis 0.052
+    nozzel_18   l_00AT
+    nozzel_19_dis 0.052
+    nozzel_19   l_00AT
+    nozzel_20_dis 0.052
+    nozzel_20   l_00AT
+    nozzel_21_dis 0.052
+    nozzel_21   l_00AT
+    nozzel_22_dis 0.052
+    nozzel_22   l_00AT
+    nozzel_23_dis 0.052
+    nozzel_23   l_00AT
+    nozzel_24_dis 0.052
+    nozzel_24   l_00AT
+    nozzel_25_dis 0.052
+    nozzel_25   l_00AT
+    nozzel_26_dis 0.052
+    nozzel_26   l_00AT
+    nozzel_27_dis 0.052
+    nozzel_27   l_00AT
+    nozzel_28_dis 0.052
+    nozzel_28   l_00AT
+    nozzel_29_dis 0.052
+    nozzel_29   l_00AT
+    nozzel_30_dis 0.052
+    nozzel_30   l_00AT
+    nozzel_31_dis 0.052
+    nozzel_31   l_00AT
+    nozzel_32_dis 0.052
+    nozzel_32   l_00AT
+    nozzel_33_dis 0.052
+}  // end of param spray_AT
+
+spray_AB
+env{
+    typeBank     nozTyp33_AB  // zone 1: 33 nozzles a 21.96 l/min bankLength   1.664 m
+    noNozzel     33
+  
+    
+    switchWidth  switch_A     // steps for switching
+    
+    nozzel_0_dis 0.052        // [m] from left to right
+    nozzel_0    l_00AB
+    nozzel_1_dis 0.052
+    nozzel_1    l_00AB
+    nozzel_2_dis 0.052
+    nozzel_2    l_00AB
+    nozzel_3_dis 0.052
+    nozzel_3    l_00AB
+    nozzel_4_dis 0.052
+    nozzel_4    l_00AB
+    nozzel_5_dis 0.052
+    nozzel_5    l_00AB
+    nozzel_6_dis 0.052
+    nozzel_6    l_00AB
+    nozzel_7_dis 0.052
+    nozzel_7    l_00AB
+    nozzel_8_dis 0.052
+    nozzel_8    l_00AB
+    nozzel_9_dis 0.052
+    nozzel_9    l_00AB
+    nozzel_10_dis 0.052
+    nozzel_10   l_00AB
+    nozzel_11_dis 0.052
+    nozzel_11   l_00AB
+    nozzel_12_dis 0.052
+    nozzel_12   l_00AB
+    nozzel_13_dis 0.052
+    nozzel_13   l_00AB
+    nozzel_14_dis 0.052
+    nozzel_14   l_00AB
+    nozzel_15_dis 0.052
+    nozzel_15   l_00AB
+    nozzel_16_dis 0.052
+    nozzel_16   l_00AB
+    nozzel_17_dis 0.052
+    nozzel_17   l_00AB
+    nozzel_18_dis 0.052
+    nozzel_18   l_00AB
+    nozzel_19_dis 0.052
+    nozzel_19   l_00AB
+    nozzel_20_dis 0.052
+    nozzel_20   l_00AB
+    nozzel_21_dis 0.052
+    nozzel_21   l_00AB
+    nozzel_22_dis 0.052
+    nozzel_22   l_00AB
+    nozzel_23_dis 0.052
+    nozzel_23   l_00AB
+    nozzel_24_dis 0.052
+    nozzel_24   l_00AB
+    nozzel_25_dis 0.052
+    nozzel_25   l_00AB
+    nozzel_26_dis 0.052
+    nozzel_26   l_00AB
+    nozzel_27_dis 0.052
+    nozzel_27   l_00AB
+    nozzel_28_dis 0.052
+    nozzel_28   l_00AB
+    nozzel_29_dis 0.052
+    nozzel_29   l_00AB
+    nozzel_30_dis 0.052
+    nozzel_30   l_00AB
+    nozzel_31_dis 0.052
+    nozzel_31   l_00AB
+    nozzel_32_dis 0.052
+    nozzel_32   l_00AB
+    nozzel_33_dis 0.052
+}  // end of param spray_AB
+
+spray_G4
+env{
+    typeBank     nozTyp33_G4  // zone 1: 33 nozzles a 36.36 l/min bankLength   1.664 m
+    noNozzel     33
+  
+    
+    switchWidth  switch_A     // steps for switching
+    
+    nozzel_0_dis 0.052        // [m] from left to right
+    nozzel_0    l_00G4
+    nozzel_1_dis 0.052
+    nozzel_1    l_00G4
+    nozzel_2_dis 0.052
+    nozzel_2    l_00G4
+    nozzel_3_dis 0.052
+    nozzel_3    l_00G4
+    nozzel_4_dis 0.052
+    nozzel_4    l_00G4
+    nozzel_5_dis 0.052
+    nozzel_5    l_00G4
+    nozzel_6_dis 0.052
+    nozzel_6    l_00G4
+    nozzel_7_dis 0.052
+    nozzel_7    l_00G4
+    nozzel_8_dis 0.052
+    nozzel_8    l_00G4
+    nozzel_9_dis 0.052
+    nozzel_9    l_00G4
+    nozzel_10_dis 0.052
+    nozzel_10   l_00G4
+    nozzel_11_dis 0.052
+    nozzel_11   l_00G4
+    nozzel_12_dis 0.052
+    nozzel_12   l_00G4
+    nozzel_13_dis 0.052
+    nozzel_13   l_00G4
+    nozzel_14_dis 0.052
+    nozzel_14   l_00G4
+    nozzel_15_dis 0.052
+    nozzel_15   l_00G4
+    nozzel_16_dis 0.052
+    nozzel_16   l_00G4
+    nozzel_17_dis 0.052
+    nozzel_17   l_00G4
+    nozzel_18_dis 0.052
+    nozzel_18   l_00G4
+    nozzel_19_dis 0.052
+    nozzel_19   l_00G4
+    nozzel_20_dis 0.052
+    nozzel_20   l_00G4
+    nozzel_21_dis 0.052
+    nozzel_21   l_00G4
+    nozzel_22_dis 0.052
+    nozzel_22   l_00G4
+    nozzel_23_dis 0.052
+    nozzel_23   l_00G4
+    nozzel_24_dis 0.052
+    nozzel_24   l_00G4
+    nozzel_25_dis 0.052
+    nozzel_25   l_00G4
+    nozzel_26_dis 0.052
+    nozzel_26   l_00G4
+    nozzel_27_dis 0.052
+    nozzel_27   l_00G4
+    nozzel_28_dis 0.052
+    nozzel_28   l_00G4
+    nozzel_29_dis 0.052
+    nozzel_29   l_00G4
+    nozzel_30_dis 0.052
+    nozzel_30   l_00G4
+    nozzel_31_dis 0.052
+    nozzel_31   l_00G4
+    nozzel_32_dis 0.052
+    nozzel_32   l_00G4
+    nozzel_33_dis 0.052
+}  // end of param spray_G4
+
+spray_B4
+env{
+    typeBank     nozTyp33_B4  // zone 1: 20 nozzles a 69.7 l/min; zone 2: 13 nozzles a 34.85 l/min; zone 3: 20 nozzles a 69.7 l/min bankLength   702.988 m
+    noNozzel     53
+  
+    
+    switchWidth  switch_A     // steps for switching
+    
+    nozzel_0_dis 0.026        // [m] from left to right
+    nozzel_0    l_0B4A
+    nozzel_1_dis 0.026
+    nozzel_1    l_0B4A
+    nozzel_2_dis 0.026
+    nozzel_2    l_0B4A
+    nozzel_3_dis 0.026
+    nozzel_3    l_0B4A
+    nozzel_4_dis 0.026
+    nozzel_4    l_0B4A
+    nozzel_5_dis 0.026
+    nozzel_5    l_0B4A
+    nozzel_6_dis 0.026
+    nozzel_6    l_0B4A
+    nozzel_7_dis 0.026
+    nozzel_7    l_0B4A
+    nozzel_8_dis 0.026
+    nozzel_8    l_0B4A
+    nozzel_9_dis 0.026
+    nozzel_9    l_0B4A
+    nozzel_10_dis 0.026
+    nozzel_10   l_0B4A
+    nozzel_11_dis 0.026
+    nozzel_11   l_0B4A
+    nozzel_12_dis 0.026
+    nozzel_12   l_0B4A
+    nozzel_13_dis 0.026
+    nozzel_13   l_0B4A
+    nozzel_14_dis 0.026
+    nozzel_14   l_0B4A
+    nozzel_15_dis 0.026
+    nozzel_15   l_0B4A
+    nozzel_16_dis 0.026
+    nozzel_16   l_0B4A
+    nozzel_17_dis 0.026
+    nozzel_17   l_0B4A
+    nozzel_18_dis 0.026
+    nozzel_18   l_0B4A
+    nozzel_19_dis 0.026
+    nozzel_19   l_0B4A
+    nozzel_20_dis 39
+    nozzel_20   l_0B4B
+    nozzel_21_dis 52
+    nozzel_21   l_0B4B
+    nozzel_22_dis 52
+    nozzel_22   l_0B4B
+    nozzel_23_dis 52
+    nozzel_23   l_0B4B
+    nozzel_24_dis 52
+    nozzel_24   l_0B4B
+    nozzel_25_dis 52
+    nozzel_25   l_0B4B
+    nozzel_26_dis 52
+    nozzel_26   l_0B4B
+    nozzel_27_dis 52
+    nozzel_27   l_0B4B
+    nozzel_28_dis 52
+    nozzel_28   l_0B4B
+    nozzel_29_dis 52
+    nozzel_29   l_0B4B
+    nozzel_30_dis 52
+    nozzel_30   l_0B4B
+    nozzel_31_dis 52
+    nozzel_31   l_0B4B
+    nozzel_32_dis 52
+    nozzel_32   l_0B4B
+    nozzel_33_dis 39
+    nozzel_33   l_0B4A
+    nozzel_34_dis 0.026
+    nozzel_34   l_0B4A
+    nozzel_35_dis 0.026
+    nozzel_35   l_0B4A
+    nozzel_36_dis 0.026
+    nozzel_36   l_0B4A
+    nozzel_37_dis 0.026
+    nozzel_37   l_0B4A
+    nozzel_38_dis 0.026
+    nozzel_38   l_0B4A
+    nozzel_39_dis 0.026
+    nozzel_39   l_0B4A
+    nozzel_40_dis 0.026
+    nozzel_40   l_0B4A
+    nozzel_41_dis 0.026
+    nozzel_41   l_0B4A
+    nozzel_42_dis 0.026
+    nozzel_42   l_0B4A
+    nozzel_43_dis 0.026
+    nozzel_43   l_0B4A
+    nozzel_44_dis 0.026
+    nozzel_44   l_0B4A
+    nozzel_45_dis 0.026
+    nozzel_45   l_0B4A
+    nozzel_46_dis 0.026
+    nozzel_46   l_0B4A
+    nozzel_47_dis 0.026
+    nozzel_47   l_0B4A
+    nozzel_48_dis 0.026
+    nozzel_48   l_0B4A
+    nozzel_49_dis 0.026
+    nozzel_49   l_0B4A
+    nozzel_50_dis 0.026
+    nozzel_50   l_0B4A
+    nozzel_51_dis 0.026
+    nozzel_51   l_0B4A
+    nozzel_52_dis 0.026
+    nozzel_52   l_0B4A
+    nozzel_53_dis 0.026
+}  // end of param spray_B4
